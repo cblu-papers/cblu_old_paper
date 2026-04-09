@@ -1,0 +1,297 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Header Styles */
+header {
+    background-color: #2C3E50;
+    color: #ECF0F1;
+    padding: 1rem;
+    display: flex;
+   justify-content: center;
+   align-items: center;
+}
+/* 
+nav {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    background-color: #34495E;
+     color: #FFFFFF;
+} */
+
+.logo img {
+    height: 50px;
+}
+
+/* .search-container {
+    display: flex;
+    gap: 5px;
+} */
+
+/* .search-container input {
+    padding: 8px;
+    border-radius: 4px;
+    border: none;
+    width: 200px;
+} */
+
+/* .search-container button {
+    padding: 8px 16px;
+    background-color: #ff9900;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+} */
+
+h1 {
+    /* text-align: right; */
+    margin: 1rem 0;
+    
+}
+/* main to heading*/
+h2{
+    margin-top: 12px;
+    text-align: center;
+    color:#2C3E50;
+}
+
+
+/* Main Content Styles
+main {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.course-buttons,
+.semester-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+button {
+    padding: 1rem;
+    font-size: 1.1rem;
+    background-color: #003366;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #004d99;
+} */
+
+/* Paper Links Styles */
+/* Main Button Container */
+
+main{
+    margin-top: 8px;
+}
+h3{
+    color: #2C3E50;
+    text-align: center;
+    margin-top: 10px;
+}
+.semester-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 4 columns by default */
+    gap: 10px;
+    padding: 20px;
+    margin-top: 6px;
+}
+
+.semester-buttons a button {
+    width: 100%;
+    padding: 15px;
+    background-color: #3498DB;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;
+}
+.semester-buttons a button:hover {
+    background-color: #2980B9;
+}
+
+
+
+
+/* Footer Styles */
+footer {
+    background-color: #2C3E50;
+    color: #BDC3C7;
+    /* text-align: center; */
+    padding: 1rem;
+    margin-top: auto;
+}
+.foot-panel ul li{
+    list-style-type: none;
+}
+
+
+
+/* Responsive Design */
+/* @media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .search-container {
+        width: 100%;
+    }
+
+    .search-container input {
+        width: 100%;
+    }
+
+    main {
+        padding: 1rem;
+    }
+
+    .course-buttons,
+    .semester-buttons {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    button {
+        font-size: 1rem;
+        padding: 0.8rem;
+    }
+} */
+ /* Responsive Design for Smaller Screens */
+@media (min-width: 768px) {
+    .semester-buttons {
+        grid-template-columns: repeat(3, 1fr); /* 2 columns for smaller screens */
+    }
+
+    .semester-buttons a button  {
+        font-size: 14px; /* Smaller font size */
+        padding: 10px; /* Adjust padding */
+    }
+
+  
+    .foot-panel{
+        background-color: #2C3E50;
+        /* color: #BDC3C7; */
+        color: #ECF0F1;
+        height: auto;
+        display: flex;
+        justify-content: space-between;
+        padding-right: 8px ;
+}
+    .foot-panel ul li p{
+        
+        display: block;
+        text-align: left;
+}
+    .foot-panel ul li h4{
+        margin-left: 8px;
+        color: #ECF0F1;
+        display: block;
+        text-align: left;
+}
+    .foot-panel ul{
+        margin-left: 15px;
+         width: 680px;
+    
+}
+}
+
+@media (max-width: 480px) {
+    /* nav {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+    } */
+    .logo img {
+        height: 30px; /* Further reduce logo size */
+    }
+
+
+
+   
+
+  
+    .semester-buttons {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for small screens */
+    }
+
+    .semester-buttons a button {
+        font-size: 14x; /* Adjust button font size */
+        padding: 15px; /* Adjust button padding */
+ }
+ .foot-panel{
+    background-color: #2C3E50;
+    /* color: #BDC3C7; */
+    height: auto;
+   
+}
+.foot-panel ul li p{
+   display: block;
+   margin-top: 3px;
+   text-align: left;
+}
+.foot-panel ul li h4{
+    display: block;
+    color: #ECF0F1;
+    text-align: left;
+    margin-top: 5px;
+    margin-left: 75px;
+}
+main{
+    height: 350px;
+}
+
+}
+@media (min-width: 992px){
+    .semester-buttons {
+        grid-template-columns: repeat(3, 1fr); /* 2 columns for small screens */
+    }
+    .semester-buttons a button {
+        font-size: 14px; /* Adjust button font size */
+         /* Adjust button padding */
+        padding: 16px;
+        
+        margin-right:10px ;
+ }
+ main{
+    height: auto;
+ }
+ header{
+    font-size: 23px;
+ }
+
+
+}
