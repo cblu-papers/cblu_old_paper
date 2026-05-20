@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<title>CBLU Camera Tool</title>
+<link rel="stylesheet" href="camera-tool.css" />
+</head>
+<body>
+<div class="phone-frame">
+
+<!-- ============ SCREEN 1: CAMERA ============ -->
+<section id="screen-camera" class="screen active">
+
+  <div class="cam-topbar">
+    <button class="icon-btn" id="btn-close-cam" data-testid="cam-close-btn" title="Close">✕</button>
+    <div class="cam-topbar-title">📷 Camera</div>
+    <button class="icon-btn" id="btn-flip-cam" data-testid="cam-flip-btn" title="Flip">🔄</button>
+  </div>
+
+  <div class="video-wrap" id="video-wrap">
+    <video id="cam-video" playsinline autoplay muted></video>
+    <div id="cam-flash"></div>
+    <div class="cam-grid">
+      <div class="grid-line h1"></div>
+      <div class="grid-line h2"></div>
+      <div class="grid-line v1"></div>
+      <div class="grid-line v2"></div>
+    </div>
+    <div class="filter-badge" id="filter-badge">Normal</div>
+    <button class="flash-btn" id="btn-flash-toggle" data-testid="cam-flash-btn" title="Flash">
+      <span id="flash-icon">⚡</span>
+      <span class="flash-lbl" id="flash-lbl">Off</span>
+    </button>
+  </div>
+
+  <div class="cam-bottom">
+    <div class="thumb-strip" id="thumb-strip">
+      <div class="thumb-empty" id="thumb-empty">No photos yet</div>
+    </div>
+
+    <div class="filter-bar" id="filter-bar">
+      <button class="filter-btn active" data-filter="normal" data-testid="filter-normal">
+        <span class="filter-preview normal-prev"></span><span>Normal</span>
+      </button>
+      <button class="filter-btn" data-filter="hd" data-testid="filter-hd">
+        <span class="filter-preview hd-prev"></span><span>HD</span>
+      </button>
+      <button class="filter-btn" data-filter="bright" data-testid="filter-bright">
+        <span class="filter-preview bright-prev"></span><span>Bright</span>
+      </button>
+      <button class="filter-btn" data-filter="bw" data-testid="filter-bw">
+        <span class="filter-preview bw-prev"></span><span>B&amp;W</span>
+      </button>
+      <button class="filter-btn" data-filter="doc" data-testid="filter-doc">
+        <span class="filter-preview doc-prev"></span><span>DocScan</span>
+      </button>
+    </div>
+
+    <div class="shutter-row">
+      <div class="photo-count-badge" id="photo-count-badge">0 / 4</div>
+      <button class="shutter-btn" id="btn-capture" data-testid="cam-shutter-btn"></button>
+      <button class="done-btn" id="btn-done-cam" data-testid="cam-done-btn" disabled>Done ✓</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SCREEN 2: REVIEW ============ -->
+<section id="screen-review" class="screen">
+  <div class="review-topbar">
+    <button class="text-btn" id="btn-back-review" data-testid="review-back-btn">← Back</button>
+    <div class="review-title">Review Photos</div>
+    <button class="text-btn" id="btn-make-pdf" data-testid="review-make-pdf-btn">Make PDF →</button>
+  </div>
+
+  <div class="review-main">
+    <div class="review-img-num" id="review-img-num">1 / 1</div>
+    <img id="review-big-img" alt="Preview" />
+    <div class="review-filters">
+      <button class="rf-btn active" data-rf="keep" data-testid="rf-keep">Keep</button>
+      <button class="rf-btn" data-rf="hd" data-testid="rf-hd">HD</button>
+      <button class="rf-btn" data-rf="bright" data-testid="rf-bright">Bright</button>
+      <button class="rf-btn" data-rf="bw" data-testid="rf-bw">B&amp;W</button>
+      <button class="rf-btn" data-rf="doc" data-testid="rf-doc">DocScan</button>
+    </div>
+  </div>
+
+  <div class="review-actions">
+    <button class="action-btn" id="btn-crop-open" data-testid="review-crop-btn">✂️ Crop</button>
+    <button class="action-btn danger" id="btn-delete-photo" data-testid="review-delete-btn">🗑️ Delete</button>
+  </div>
+
+  <div class="review-strip" id="review-strip"></div>
+</section>
+
+<!-- ============ SCREEN 3: CROP ============ -->
+<section id="screen-crop" class="screen">
+  <div class="crop-topbar">
+    <button class="text-btn" id="btn-cancel-crop" data-testid="crop-cancel-btn">✕ Cancel</button>
+    <div class="crop-title">Adjust Corners</div>
+    <button class="text-btn" id="btn-apply-crop" data-testid="crop-apply-btn">Apply ✓</button>
+  </div>
+
+  <div class="crop-area" id="crop-area">
+    <canvas id="crop-canvas"></canvas>
+    <div id="crop-mask">
+      <div class="crop-mask-piece" id="cm-top"></div>
+      <div class="crop-mask-piece" id="cm-bottom"></div>
+      <div class="crop-mask-piece" id="cm-left"></div>
+      <div class="crop-mask-piece" id="cm-right"></div>
+    </div>
+    <div id="crop-selection">
+      <div class="crop-grid-line crop-h1"></div>
+      <div class="crop-grid-line crop-h2"></div>
+      <div class="crop-grid-line crop-v1"></div>
+      <div class="crop-grid-line crop-v2"></div>
+      <div class="crop-handle ch-tl" data-handle="tl"></div>
+      <div class="crop-handle ch-tr" data-handle="tr"></div>
+      <div class="crop-handle ch-bl" data-handle="bl"></div>
+      <div class="crop-handle ch-br" data-handle="br"></div>
+      <div class="crop-handle ch-t" data-handle="t"></div>
+      <div class="crop-handle ch-b" data-handle="b"></div>
+      <div class="crop-handle ch-l" data-handle="l"></div>
+      <div class="crop-handle ch-r" data-handle="r"></div>
+    </div>
+  </div>
+
+  <div class="crop-bottom">
+    <button class="crop-quick-btn" id="btn-crop-reset" data-testid="crop-reset-btn">↺ Reset</button>
+    <span class="crop-hint">Drag corners or sides to crop</span>
+  </div>
+</section>
+
+<!-- ============ SCREEN 4: UPLOAD ============ -->
+<section id="screen-upload" class="screen">
+  <div class="upload-topbar">
+    <button class="text-btn" id="btn-back-upload" data-testid="upload-back-btn">← Back</button>
+    <div class="upload-title">Upload Paper</div>
+    <span></span>
+  </div>
+
+  <div class="upload-body">
+    <div class="pdf-preview-wrap">
+      <div class="pdf-thumb-grid" id="pdf-thumb-grid"></div>
+    </div>
+
+    <div class="upload-form">
+      <label class="form-lbl" for="upload-paper-name">Paper Name *</label>
+      <input id="upload-paper-name" class="upload-input" type="text" placeholder="e.g. Mathematics 2023" data-testid="upload-name-input" />
+      <div class="upload-info" id="upload-info">0 photo · PDF ready</div>
+    </div>
+
+    <button id="btn-upload-pdf" class="upload-btn" data-testid="upload-submit-btn">📤 Upload to Firebase</button>
+    <div id="upload-status" class="upload-status"></div>
+  </div>
+</section>
+
+</div>
+
+<!-- jsPDF + Firebase -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<script src="camera-tool.js"></script>
+</body>
+</html>
+
